@@ -21,13 +21,10 @@ class VideoController extends Controller
             'user_id' => ['nullable', 'exists:users,id'],
         ]);
 
-        $videos = Video::paginate(12);
+        $videos = Video::with('user')->paginate(8);
 
         return Inertia::render('Videos', [
             'users' => fn()=>User::select(['id', 'name'])->get(),
-//            'videos' => fn()=>Video::with('user')
-//                ->when($request->filled('user_id'), fn($query)=>$query->where('user_id', $request->query('user_id')))
-//                ->paginate(12),
             'videos' => $videos,
         ]);
     }
