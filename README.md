@@ -14,7 +14,8 @@ Frontend Framework:
 - Npm v10.3.0
 
 Frontend installed packages:
-- none
+- **date-fns v3.0.0 (javaScript date utility library):** https://date-fns.org/docs/Getting-Started
+- **React Markdown (a React component to render markdown):** https://github.com/remarkjs/react-markdown?tab=readme-ov-file
 
 Note:
 - using server-side mysql database to save todo data
