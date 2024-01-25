@@ -4,19 +4,30 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreVideoRequest;
 use App\Http\Requests\UpdateVideoRequest;
+use App\Models\User;
 use App\Models\Video;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class VideoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request):Response
     {
-        $videos = Video::all();
+        $request->validate([
+            'user_id' => ['nullable', 'exists:users,id'],
+        ]);
+
+        $videos = Video::paginate(12);
 
         return Inertia::render('Videos', [
+            'users' => fn()=>User::select(['id', 'name'])->get(),
+//            'videos' => fn()=>Video::with('user')
+//                ->when($request->filled('user_id'), fn($query)=>$query->where('user_id', $request->query('user_id')))
+//                ->paginate(12),
             'videos' => $videos,
         ]);
     }

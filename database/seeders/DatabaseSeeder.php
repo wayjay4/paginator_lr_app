@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
 
          $users = User::all();
 
-         Video::factory(
+         Video::factory()->forEachSequence(
              ...Collection::times(300, fn()=>['user_id' => $users->random()]),
          )->create();
     }
