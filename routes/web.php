@@ -30,7 +30,8 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/videos', [VideoController::class, 'index'])->name('videos.index');
+Route::get('/videos_plinks', [VideoController::class, 'index_plinks'])->name('videos.index_plinks');
+Route::get('/videos_pscroll', [VideoController::class, 'index_pscroll'])->name('videos.index_pscroll');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

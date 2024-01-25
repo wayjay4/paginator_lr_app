@@ -1,7 +1,7 @@
 import VideoData from "@/Pages/Videos/VideoData.jsx";
 import Pagination from "@/Components/Pagination.jsx";
 
-export default function Videos(props) {
+function VideosPaginationLinks(props) {
     console.log(props);
 
     return (
@@ -16,3 +16,5 @@ export default function Videos(props) {
         </div>
     )
 }
+
+export default VideosPaginationLinks;

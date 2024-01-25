@@ -15,7 +15,7 @@ class VideoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request):Response
+    public function index_plinks(Request $request):Response
     {
         $request->validate([
             'user_id' => ['nullable', 'exists:users,id'],
@@ -23,7 +23,24 @@ class VideoController extends Controller
 
         $videos = Video::with('user')->paginate(8);
 
-        return Inertia::render('Videos', [
+        return Inertia::render('VideosPaginationLinks', [
+            'users' => fn()=>User::select(['id', 'name'])->get(),
+            'videos' => $videos,
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function index_pscroll(Request $request):Response
+    {
+        $request->validate([
+            'user_id' => ['nullable', 'exists:users,id'],
+        ]);
+
+        $videos = Video::with('user')->paginate(16);
+
+        return Inertia::render('VideosPaginationScroll', [
             'users' => fn()=>User::select(['id', 'name'])->get(),
             'videos' => $videos,
         ]);
