@@ -1,7 +1,7 @@
 import {Link} from "@inertiajs/react";
 import ReactMarkdown from 'react-markdown';
 
-function Pagination({links}) {
+function PaginationScroll({links}) {
     let counter = 1;
 
     return (
@@ -26,4 +26,4 @@ function Pagination({links}) {
     );
 }
 
-export default Pagination;
+export default PaginationScroll;

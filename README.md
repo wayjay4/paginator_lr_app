@@ -106,7 +106,7 @@ Run the dev server (the output will give the address):
 php artisan serve
 ```
 
-You're ready to go! Visit Todo App in your browser!
+You're ready to go! Visit App in your browser!
 
 ---
 
@@ -150,6 +150,6 @@ Run database migrations and seeder for db service container:
 sail artisan migrate:fresh --seed
 ```
 
-You're ready to go! Visit Todo App in your browser!:
+You're ready to go! Visit App in your browser!:
 
 http://localhost/

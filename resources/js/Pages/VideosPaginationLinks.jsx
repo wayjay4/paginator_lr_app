@@ -1,5 +1,5 @@
 import VideoData from "@/Pages/Videos/VideoData.jsx";
-import Pagination from "@/Components/Pagination.jsx";
+import PaginationLinks from "@/Components/PaginationLinks.jsx";
 
 function VideosPaginationLinks(props) {
     console.log(props);
@@ -12,7 +12,7 @@ function VideosPaginationLinks(props) {
                 </ul>
             </div>
 
-            <Pagination links={props['videos'].links} />
+            <PaginationLinks links={props['videos'].links} />
         </div>
     )
 }

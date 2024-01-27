@@ -38,11 +38,14 @@ class VideoController extends Controller
             'user_id' => ['nullable', 'exists:users,id'],
         ]);
 
-        $videos = Video::with('user')->paginate(16);
+        $paginate_count = 12;
+
+        $videos = Video::with('user')->paginate($paginate_count);
 
         return Inertia::render('VideosPaginationScroll', [
             'users' => fn()=>User::select(['id', 'name'])->get(),
             'videos' => $videos,
+            'message' => 'from web route',
         ]);
     }
 
