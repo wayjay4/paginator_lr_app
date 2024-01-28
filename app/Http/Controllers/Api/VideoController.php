@@ -11,7 +11,7 @@ class VideoController extends Controller
     use VideoTrait;
 
     /**
-     * Display a listing of the resource.
+     * Get a listing of the resource.
      */
     public function index(Request $request)
     {

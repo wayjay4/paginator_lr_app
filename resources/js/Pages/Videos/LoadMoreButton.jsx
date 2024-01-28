@@ -1,8 +1,8 @@
-import VideoData from "@/Pages/Videos/VideoData.jsx";
+import VideoData from "@/Pages/Videos/Components/VideoData.jsx";
 import {Link} from "@inertiajs/react";
 import {useEffect, useState} from "react";
 import axios from 'axios';
-import NavHeader from "@/Components/NavHeader.jsx";
+import NavHeader from "@/Pages/Videos/Components/NavHeader.jsx";
 
 function LoadMoreButton(props) {
     const [videos, setVideos] = useState([]);

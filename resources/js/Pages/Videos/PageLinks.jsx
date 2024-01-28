@@ -1,6 +1,6 @@
-import VideoData from "@/Pages/Videos/VideoData.jsx";
-import PaginationLinks from "@/Components/PaginationLinks.jsx";
-import NavHeader from "@/Components/NavHeader.jsx";
+import VideoData from "@/Pages/Videos/Components/VideoData.jsx";
+import PaginationLinks from "@/Pages/Videos/Components/PaginationLInks.jsx";
+import NavHeader from "@/Pages/Videos/Components/NavHeader.jsx";
 
 function PageLinks(props) {
     return (

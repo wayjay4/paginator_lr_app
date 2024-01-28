@@ -18,15 +18,17 @@ trait VideoTrait {
 
         $videos = Video::with('user')->paginate($paginate_count);
 
+        $user = User::select(['id', 'name'])->get();
+
         if($component !== null) {
             return Inertia::render($component, [
-                'users' => fn() => User::select(['id', 'name'])->get(),
+                'users' => $user,
                 'videos' => $videos,
             ]);
         }
         else {
             return response([
-                'users' => fn()=>User::select(['id', 'name'])->get(),
+                'users' => $user,
                 'videos' => $videos,
             ], 200);
         }
