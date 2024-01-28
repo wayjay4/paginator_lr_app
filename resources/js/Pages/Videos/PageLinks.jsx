@@ -2,7 +2,7 @@ import VideoData from "@/Pages/Videos/VideoData.jsx";
 import PaginationLinks from "@/Components/PaginationLinks.jsx";
 import NavHeader from "@/Components/NavHeader.jsx";
 
-function VideosPageLinks(props) {
+function PageLinks(props) {
     return (
         <>
             <NavHeader />
@@ -20,4 +20,4 @@ function VideosPageLinks(props) {
     )
 }
 
-export default VideosPageLinks;
+export default PageLinks;

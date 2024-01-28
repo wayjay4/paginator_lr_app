@@ -1,12 +1,12 @@
 import VideoData from "@/Pages/Videos/VideoData.jsx";
-import {Link} from "@inertiajs/react";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import axios from 'axios';
 import NavHeader from "@/Components/NavHeader.jsx";
 
-function VideosLoadMoreButton(props) {
+function InfiniteScroll(props) {
     const [videos, setVideos] = useState([]);
     const [nextUrl, setNextUrl] = useState((props.videos.next_page_url) ? props.videos.next_page_url.replace('http://localhost/', 'api/') : props.videos.next_page_url)
+    const [isLoading, setIsLoading] = useState(false);
 
     function handleResponse(response)  {
         setVideos([...videos, ...response.data.videos.data]);
@@ -14,29 +14,55 @@ function VideosLoadMoreButton(props) {
     }
 
     const fetchData = (url) => {
+        if(!isLoading && nextUrl) {
+            setIsLoading(true);
+        }
+        else {
+            return;
+        }
+
         axios({
             method: 'get',
             baseURL: url,
             responseType: 'json',
-        }).then((response)=>{
+        }).then((response) => {
             handleResponse(response);
+            setIsLoading(false);
         })
     }
 
     useEffect(() => {
-        const url = '/api/videos';
-        fetchData(url);
+        fetchData('/api/videos');
     }, []);
 
     function loadMoreItems(event=null) {
-        if(event) {
-            event.preventDefault();
-        }
-
         if(nextUrl) {
             fetchData(nextUrl);
         }
     }
+
+    const landmark = useRef(null);
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if(entry.isIntersecting) {
+                if(! isLoading) {
+                    loadMoreItems();
+                }
+            }
+        });
+    }, {
+        rootMargin: '0px 0px 250px 0px'
+    });
+
+    useEffect(() => {
+        observer.observe(landmark.current);
+
+        // Cleanup function
+        return () => {
+            observer.disconnect();
+        };
+    });
 
     return (
         <>
@@ -49,15 +75,11 @@ function VideosLoadMoreButton(props) {
                     </ul>
                 </div>
 
-                {nextUrl && (
-                    <div className="mt-10 mb-10 flex justify-center">
-                        <Link onClick={loadMoreItems}><span className="font-bold hover:underline hover:text-blue-700">Load More</span></Link>
-                    </div>
-                )}
+                <div ref={landmark}></div>
 
                 {! nextUrl && (
                     <div className="mt-10 mb-10 flex justify-center">
-                        <div>End of the line buddy!</div>
+                        End of the line buddy!
                     </div>
                 )}
             </div>
@@ -65,4 +87,4 @@ function VideosLoadMoreButton(props) {
     )
 }
 
-export default VideosLoadMoreButton;
+export default InfiniteScroll;
