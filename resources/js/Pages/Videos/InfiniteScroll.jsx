@@ -1,57 +1,12 @@
 import VideoData from "@/Pages/Videos/Components/VideoData.jsx";
-import {useEffect, useRef, useState} from "react";
-import axios from 'axios';
+import {useRef} from "react";
 import NavHeader from "@/Pages/Videos/Components/NavHeader.jsx";
-import useIntersect from "@/Composables/useIntersect.jsx";
+import {useInfiniteScroll} from "@/Composables/useInfiniteScroll.jsx";
 
 function InfiniteScroll(props) {
-    const [videos, setVideos] = useState([]);
-    const [nextUrl, setNextUrl] = useState((props.videos.next_page_url) ? props.videos.next_page_url.replace('http://localhost/', 'api/') : props.videos.next_page_url)
-    const [isLoading, setIsLoading] = useState(false);
-
-    function handleResponse(response)  {
-        setVideos([...videos, ...response.data.videos.data]);
-        setNextUrl(response.data.videos.next_page_url);
-    }
-
-    const fetchData = (url) => {
-        if(!isLoading && nextUrl) {
-            setIsLoading(true);
-        }
-        else {
-            return;
-        }
-
-        axios({
-            method: 'get',
-            baseURL: url,
-            responseType: 'json',
-        }).then((response) => {
-            handleResponse(response);
-            setIsLoading(false);
-        })
-    }
-
-    useEffect(() => {
-        fetchData('/api/videos');
-    }, []);
-
-    function loadMoreItems(event=null) {
-        if(nextUrl) {
-            fetchData(nextUrl);
-        }
-    }
-
     const landmark = useRef(null);
+    const {items:videos, canLoadMoreItems} = useInfiniteScroll('videos', '/api/videos', landmark);
 
-    const callback = () => {
-        if(! isLoading) {
-            loadMoreItems();
-        }
-    };
-
-    useIntersect(landmark, callback, {rootMargin: '0px 0px 250px 0px'});
-    
     return (
         <>
             <NavHeader />
@@ -65,7 +20,7 @@ function InfiniteScroll(props) {
 
                 <div ref={landmark}></div>
 
-                {! nextUrl && (
+                {! canLoadMoreItems && (
                     <div className="mt-10 mb-10 flex justify-center">
                         End of the line buddy!
                     </div>
