@@ -18,7 +18,7 @@ class VideoController extends Controller
      */
     public function indexPageLinks(Request $request):Response
     {
-        return $this->getVideosData($request, 'Videos/PageLinks');
+        return $this->getVideos($request, 'Videos/PageLinks');
     }
 
     /**
@@ -26,7 +26,7 @@ class VideoController extends Controller
      */
     public function indexLoadButton(Request $request):Response
     {
-        return $this->getVideosData($request, 'Videos/LoadMoreButton');
+        return $this->getVideos($request, 'Videos/LoadMoreButton');
     }
 
     /**
@@ -34,7 +34,7 @@ class VideoController extends Controller
      */
     public function indexInfiniteScroll(Request $request):Response
     {
-        return $this->getVideosData($request, 'Videos/InfiniteScroll');
+        return $this->getVideos($request, 'Videos/InfiniteScroll');
     }
 
     /**

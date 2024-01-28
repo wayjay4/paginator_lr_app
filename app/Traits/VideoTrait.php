@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 trait VideoTrait {
-    public function getVideosData(Request $request, string $component=null)
+    public function getVideos(Request $request, string $component=null)
     {
         $request->validate([
             'user_id' => ['nullable', 'exists:users,id'],
