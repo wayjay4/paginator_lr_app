@@ -24,7 +24,7 @@ function VideosLoadMoreButton(props) {
     }
 
     useEffect(() => {
-        const url = '/api/videos_pscroll';
+        const url = '/api/videos';
         fetchData(url);
     }, []);
 

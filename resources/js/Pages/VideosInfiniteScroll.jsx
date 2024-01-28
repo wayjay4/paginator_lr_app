@@ -32,7 +32,7 @@ function VideosInfiniteScroll(props) {
     }
 
     useEffect(() => {
-        fetchData('/api/videos_pscroll');
+        fetchData('/api/videos');
     }, []);
 
     function loadMoreItems(event=null) {

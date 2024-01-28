@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreVideoRequest;
 use App\Http\Requests\UpdateVideoRequest;
 use App\Models\Video;
 use App\Traits\VideoTrait;
 use Illuminate\Http\Request;
-use Inertia\Response;
 
 class VideoController extends Controller
 {
@@ -16,25 +16,9 @@ class VideoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function indexPageLinks(Request $request):Response
+    public function getVideos(Request $request)
     {
-        return $this->getVideosData($request, 'VideosPageLinks');
-    }
-
-    /**
-     * Display a listing of the resource.
-     */
-    public function indexLoadButton(Request $request):Response
-    {
-        return $this->getVideosData($request, 'VideosLoadMoreButton');
-    }
-
-    /**
-     * Display a listing of the resource.
-     */
-    public function indexInfiniteScroll(Request $request):Response
-    {
-        return $this->getVideosData($request, 'VideosInfiniteScroll');
+        return $this->getVideosData($request);
     }
 
     /**

@@ -1,7 +1,6 @@
 <?php
 
-use App\Models\User;
-use App\Models\Video;
+use App\Http\Controllers\Api\VideoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,18 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/videos_pscroll', function (Request $request) {
-    $request->validate([
-        'user_id' => ['nullable', 'exists:users,id'],
-    ]);
-
-    $paginate_count = 8;
-
-    $videos = Video::with('user')->paginate($paginate_count);
-
-    return response([
-        'users' => fn()=>User::select(['id', 'name'])->get(),
-        'videos' => $videos,
-        'message' => 'from api route',
-    ], 200);
-});
+Route::get('/videos', [VideoController::class, 'getVideos'])->name('api.videos');
