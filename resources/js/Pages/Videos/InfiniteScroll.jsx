@@ -2,6 +2,7 @@ import VideoData from "@/Pages/Videos/Components/VideoData.jsx";
 import {useEffect, useRef, useState} from "react";
 import axios from 'axios';
 import NavHeader from "@/Pages/Videos/Components/NavHeader.jsx";
+import useIntersect from "@/Composables/useIntersect.jsx";
 
 function InfiniteScroll(props) {
     const [videos, setVideos] = useState([]);
@@ -43,27 +44,14 @@ function InfiniteScroll(props) {
 
     const landmark = useRef(null);
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if(entry.isIntersecting) {
-                if(! isLoading) {
-                    loadMoreItems();
-                }
-            }
-        });
-    }, {
-        rootMargin: '0px 0px 250px 0px'
-    });
+    const callback = () => {
+        if(! isLoading) {
+            loadMoreItems();
+        }
+    };
 
-    useEffect(() => {
-        observer.observe(landmark.current);
-
-        // Cleanup function
-        return () => {
-            observer.disconnect();
-        };
-    });
-
+    useIntersect(landmark, callback, {rootMargin: '0px 0px 250px 0px'});
+    
     return (
         <>
             <NavHeader />
