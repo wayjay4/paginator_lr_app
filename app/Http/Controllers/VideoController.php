@@ -50,6 +50,26 @@ class VideoController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     */
+    public function index_pinfinitescroll(Request $request):Response
+    {
+        $request->validate([
+            'user_id' => ['nullable', 'exists:users,id'],
+        ]);
+
+        $paginate_count = 12;
+
+        $videos = Video::with('user')->paginate($paginate_count);
+
+        return Inertia::render('VideosPaginationInfiniteScroll', [
+            'users' => fn()=>User::select(['id', 'name'])->get(),
+            'videos' => $videos,
+            'message' => 'from web route',
+        ]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
