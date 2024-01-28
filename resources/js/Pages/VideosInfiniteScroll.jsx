@@ -3,7 +3,7 @@ import {useEffect, useRef, useState} from "react";
 import axios from 'axios';
 import NavHeader from "@/Components/NavHeader.jsx";
 
-function VideosPaginationScroll(props) {
+function VideosInfiniteScroll(props) {
     const [videos, setVideos] = useState([]);
     const [nextUrl, setNextUrl] = useState((props.videos.next_page_url) ? props.videos.next_page_url.replace('http://localhost/', 'api/') : props.videos.next_page_url)
     const [isLoading, setIsLoading] = useState(false);
@@ -87,4 +87,4 @@ function VideosPaginationScroll(props) {
     )
 }
 
-export default VideosPaginationScroll;
+export default VideosInfiniteScroll;

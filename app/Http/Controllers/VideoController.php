@@ -15,7 +15,7 @@ class VideoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index_plinks(Request $request):Response
+    public function indexPageLinks(Request $request):Response
     {
         $request->validate([
             'user_id' => ['nullable', 'exists:users,id'],
@@ -23,7 +23,7 @@ class VideoController extends Controller
 
         $videos = Video::with('user')->paginate(8);
 
-        return Inertia::render('VideosPaginationLinks', [
+        return Inertia::render('VideosPageLinks', [
             'users' => fn()=>User::select(['id', 'name'])->get(),
             'videos' => $videos,
         ]);
@@ -32,7 +32,7 @@ class VideoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index_pscroll(Request $request):Response
+    public function indexLoadButton(Request $request):Response
     {
         $request->validate([
             'user_id' => ['nullable', 'exists:users,id'],
@@ -42,7 +42,7 @@ class VideoController extends Controller
 
         $videos = Video::with('user')->paginate($paginate_count);
 
-        return Inertia::render('VideosPaginationScroll', [
+        return Inertia::render('VideosLoadMoreButton', [
             'users' => fn()=>User::select(['id', 'name'])->get(),
             'videos' => $videos,
             'message' => 'from web route',
@@ -52,7 +52,7 @@ class VideoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index_pinfinitescroll(Request $request):Response
+    public function indexInfiniteScroll(Request $request):Response
     {
         $request->validate([
             'user_id' => ['nullable', 'exists:users,id'],
@@ -62,7 +62,7 @@ class VideoController extends Controller
 
         $videos = Video::with('user')->paginate($paginate_count);
 
-        return Inertia::render('VideosPaginationInfiniteScroll', [
+        return Inertia::render('VideosInfiniteScroll', [
             'users' => fn()=>User::select(['id', 'name'])->get(),
             'videos' => $videos,
             'message' => 'from web route',

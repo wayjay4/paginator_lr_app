@@ -17,7 +17,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -26,19 +26,19 @@ Route::get('/', function () {
     ]);
 });
 
-//Route::get('/dashboard', function () {
-//    return Inertia::render('Dashboard');
-//})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', [VideoController::class, 'indexPageLinks'])->name('videos.index_page_links');
+Route::get('/videos_page_links', [VideoController::class, 'indexPageLinks'])->name('videos.index_page_links');
+Route::get('/videos_load_button', [VideoController::class, 'indexLoadButton'])->name('videos.index_load_button');
+Route::get('/videos_infinite_scroll', [VideoController::class, 'indexInfiniteScroll'])->name('videos.index_infinite_scroll');
 
-Route::get('/videos_plinks', [VideoController::class, 'index_plinks'])->name('videos.index_plinks');
-Route::get('/videos_pscroll', [VideoController::class, 'index_pscroll'])->name('videos.index_pscroll');
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/videos_pinfinitescroll', [VideoController::class, 'index_pinfinitescroll'])->name('videos.pinfinitescroll');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-//Route::middleware('auth')->group(function () {
-//    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-//});
-//
-//require __DIR__.'/auth.php';
+require __DIR__.'/auth.php';

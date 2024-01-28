@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import axios from 'axios';
 import NavHeader from "@/Components/NavHeader.jsx";
 
-function VideosPaginationScroll(props) {
+function VideosLoadMoreButton(props) {
     const [videos, setVideos] = useState([]);
     const [nextUrl, setNextUrl] = useState((props.videos.next_page_url) ? props.videos.next_page_url.replace('http://localhost/', 'api/') : props.videos.next_page_url)
 
@@ -41,7 +41,7 @@ function VideosPaginationScroll(props) {
     return (
         <>
             <NavHeader />
-            
+
             <div className={'video-catalog-container'}>
                 <div className="mt-6">
                     <ul className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
@@ -65,4 +65,4 @@ function VideosPaginationScroll(props) {
     )
 }
 
-export default VideosPaginationScroll;
+export default VideosLoadMoreButton;
