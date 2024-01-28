@@ -26,10 +26,10 @@ Route::get('/welcome', function () {
     ]);
 });
 
-Route::get('/', [VideoController::class, 'indexPageLinks'])->name('videos.index_page_links');
-Route::get('/videos_page_links', [VideoController::class, 'indexPageLinks'])->name('videos.index_page_links');
-Route::get('/videos_load_button', [VideoController::class, 'indexLoadButton'])->name('videos.index_load_button');
-Route::get('/videos_infinite_scroll', [VideoController::class, 'indexInfiniteScroll'])->name('videos.index_infinite_scroll');
+Route::get('/', [VideoController::class, 'indexPageLinks'])->name('videos.page_links');
+Route::get('/videos_page_links', [VideoController::class, 'indexPageLinks'])->name('videos.page_links');
+Route::get('/videos_load_button', [VideoController::class, 'indexLoadButton'])->name('videos.load_button');
+Route::get('/videos_infinite_scroll', [VideoController::class, 'indexInfiniteScroll'])->name('videos.infinite_scroll');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
