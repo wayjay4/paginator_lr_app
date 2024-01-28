@@ -1,6 +1,17 @@
 # Video Catalog App
 
-A Video Catalog application to illustrate using paginator.
+A Video Catalog application to illustrate using Laravel paginator techniques and hooks: useIntersectionObserver useRef:
+1. Paginator using links
+2. Paginator using load more data button
+3. Paginator using infinite scrolling w/useIntersectionObserver
+
+Topics of interest:
+- https://laravel.com/docs/10.x/pagination
+- https://laracasts.com/topics/pagination
+- https://usehooks.com/useintersectionobserver
+- https://react.dev/reference/react/useRef#usage
+
+---
 
 ![homepage_screenshot.png](public/images/homepage_screenshot.png)
 

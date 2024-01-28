@@ -25,7 +25,7 @@ Route::get('/videos_pscroll', function (Request $request) {
         'user_id' => ['nullable', 'exists:users,id'],
     ]);
 
-    $paginate_count = 16;
+    $paginate_count = 50;
 
     $videos = Video::with('user')->paginate($paginate_count);
 

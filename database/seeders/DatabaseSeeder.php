@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-         User::factory(500)->create();
+         User::factory(2500)->create();
 
          User::factory()->create([
              'name' => 'Test User',
@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
          $users = User::all();
 
          Video::factory()->forEachSequence(
-             ...Collection::times(50, fn()=>['user_id' => $users->random()]),
+             ...Collection::times(250, fn()=>['user_id' => $users->random()]),
          )->create();
     }
 }
