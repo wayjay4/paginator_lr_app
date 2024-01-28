@@ -7,7 +7,7 @@ use App\Http\Requests\UpdateVideoRequest;
 use App\Models\Video;
 use App\Traits\VideoTrait;
 use Illuminate\Http\Request;
-use Inertia\Response;
+use Inertia\Response as InertiaResponse;
 
 class VideoController extends Controller
 {
@@ -16,7 +16,7 @@ class VideoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function indexPageLinks(Request $request):Response
+    public function indexPageLinks(Request $request): InertiaResponse
     {
         return $this->getVideos($request, 'Videos/PageLinks');
     }
@@ -24,7 +24,7 @@ class VideoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function indexLoadButton(Request $request):Response
+    public function indexLoadButton(Request $request): InertiaResponse
     {
         return $this->getVideos($request, 'Videos/LoadMoreButton');
     }
@@ -32,7 +32,7 @@ class VideoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function indexInfiniteScroll(Request $request):Response
+    public function indexInfiniteScroll(Request $request): InertiaResponse
     {
         return $this->getVideos($request, 'Videos/InfiniteScroll');
     }

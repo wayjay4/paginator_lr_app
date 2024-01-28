@@ -4,11 +4,16 @@ namespace App\Traits;
 
 use App\Models\User;
 use App\Models\Video;
+use Illuminate\Contracts\Foundation\Application as ContractsApplication;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
 
 trait VideoTrait {
-    public function getVideos(Request $request, string $component=null)
+    public function getVideos(Request $request, string $component=null): Application|Response|InertiaResponse|ContractsApplication|ResponseFactory
     {
         $request->validate([
             'user_id' => ['nullable', 'exists:users,id'],
