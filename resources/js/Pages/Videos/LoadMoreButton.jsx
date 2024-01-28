@@ -29,9 +29,7 @@ function LoadMoreButton(props) {
     }, []);
 
     function loadMoreItems(event=null) {
-        if(event) {
-            event.preventDefault();
-        }
+        event.preventDefault();
 
         if(nextUrl) {
             fetchData(nextUrl);
