@@ -6,10 +6,7 @@ import {useInfiniteScroll} from "@/Composables/useInfiniteScroll.jsx";
 function InfiniteScroll(props) {
     const landmark = useRef(null);
     const {items:videos, canLoadMoreItems} = useInfiniteScroll('videos', '/api/videos', landmark);
-
-    console.log('url:');
-    console.log();
-
+    
     return (
         <>
             <NavHeader />

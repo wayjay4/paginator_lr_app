@@ -19,4 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/videos', [VideoController::class, 'index'])->name('api.index');
+Route::get('/videos', [VideoController::class, 'index'])->name('api.videos.');
