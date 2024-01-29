@@ -21,7 +21,9 @@ trait VideoTrait {
 
         $paginate_count = 8;
 
-        $videos = Video::with('user')->paginate($paginate_count);
+        $videos = Video::with('user')
+            ->when($request->filled('user_id'), fn ($query) => $query->where('user_id', $request->query('user_id')))
+            ->paginate($paginate_count);
 
         $user = User::select(['id', 'name'])->get();
 
