@@ -13,32 +13,41 @@ use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
 
 trait VideoTrait {
-    public function getVideos(Request $request, string $component=null): Application|Response|InertiaResponse|ContractsApplication|ResponseFactory
+    public function getVideos(Request $request=null, string $component=null): Application|Response|InertiaResponse|ContractsApplication|ResponseFactory
     {
-        $request->validate([
-            'user_id' => ['nullable', 'exists:users,id'],
-        ]);
+        $user = User::select(['id', 'name'])->get();
 
         $paginate_count = 8;
 
-        $videos = Video::with('user')
-            ->when($request->filled('user_id'), fn ($query) => $query->where('user_id', $request->query('user_id')))
-            ->paginate($paginate_count);
+        if($request !== null and $request->filled('user_id') and $request->query('user_id') > 0) {
+            $request->validate([
+                'user_id' => ['nullable', 'exists:users,id'],
+            ]);
 
-        $user = User::select(['id', 'name'])->get();
+            $videos = Video::with('user')
+                ->where('user_id', $request->query('user_id'))
+                ->paginate($paginate_count);
+
+            $user_id = $request->query('user_id');
+        }
+        else {
+            $videos = Video::with('user')->paginate($paginate_count);
+            $user_id = 0;
+        }
 
         if($component !== null) {
             return Inertia::render($component, [
                 'users' => $user,
                 'videos' => $videos,
+                'selected_user' => $user_id,
             ]);
         }
         else {
             return response([
                 'users' => $user,
                 'videos' => $videos,
+                'selected_user' => $user_id,
             ], 200);
         }
     }
-
 }

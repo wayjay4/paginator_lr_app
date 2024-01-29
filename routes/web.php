@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserVideoController;
 use App\Http\Controllers\VideoController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,10 @@ Route::get('/', [VideoController::class, 'indexPageLinks'])->name('videos.page_l
 Route::get('/videos_page_links', [VideoController::class, 'indexPageLinks'])->name('videos.page_links');
 Route::get('/videos_load_button', [VideoController::class, 'indexLoadButton'])->name('videos.load_button');
 Route::get('/videos_infinite_scroll', [VideoController::class, 'indexInfiniteScroll'])->name('videos.infinite_scroll');
+
+Route::get('/users/{user}/videos_page_links/', [UserVideoController::class, 'indexPageLinks'])->name('users.videos.page_links');
+Route::get('/users/{user}/videos_load_button/', [UserVideoController::class, 'indexLoadButton'])->name('users.videos.load_button');
+Route::get('/users/{user}/videos_infinite_scroll/', [UserVideoController::class, 'indexInfiniteScroll'])->name('users.videos.infinite_scroll');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

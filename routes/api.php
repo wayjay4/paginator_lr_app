@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\UserVideoController;
 use App\Http\Controllers\Api\VideoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/videos', [VideoController::class, 'index'])->name('api.videos.');
+Route::get('/users/{user}/videos', [UserVideoController::class, 'index'])->name('api.users.videos');

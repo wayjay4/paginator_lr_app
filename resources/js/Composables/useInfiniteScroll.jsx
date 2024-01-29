@@ -1,8 +1,8 @@
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import useIntersect from "@/Composables/useIntersect.jsx";
 import axios from "axios";
 
-export function useInfiniteScroll(propName, baseApiUrl, landmark) {
+export function useInfiniteScroll(prop_name, api_url, landmark) {
     const [items, setItems] = useState([]);
     const [nextUrl, setNextUrl] = useState(null)
     const [isLoading, setIsLoading] = useState(false);
@@ -20,14 +20,14 @@ export function useInfiniteScroll(propName, baseApiUrl, landmark) {
             baseURL: url,
             responseType: 'json',
         }).then((response) => {
-            setItems([...items, ...response.data[propName].data]);
-            setNextUrl(response.data[propName].next_page_url);
+            setItems([...items, ...response.data[prop_name].data]);
+            setNextUrl(response.data[prop_name].next_page_url);
             setIsLoading(false);
         })
     }
 
     useEffect(() => {
-        fetchData(baseApiUrl);
+        fetchData(api_url);
     }, []);
 
     function loadMoreItems() {
