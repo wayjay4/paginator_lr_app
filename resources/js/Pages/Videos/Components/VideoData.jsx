@@ -25,8 +25,8 @@ function VideoData({videos}) {
                             <img src={images[video.id]} alt={'video_thumbnail'} className="pointer-events-none object-cover group-hover:opacity-75" />
                         </div>
                         <p className="pointer-events-none mt-2 block truncate text-sm font-bold text-[#14FFEC]">{video.title}</p>
-                        <p className="pointer-events-none line-clamp-3 text-sm text-white">{video.description}</p>
-                        <p className="mt-1 pointer-events-none block text-sm font-medium text-[#14FFEC]">Created by <span className="text-[#14FFEC] font-bold">{video.user.name}</span> <br /> {computeReadableDate(video.created_at)}</p>
+                        <p className="pointer-events-none line-clamp-3 text-sm text-white mx-2">{video.description}</p>
+                        <p className="mt-1 pointer-events-none block text-sm font-medium text-[#14FFEC]">Created by <span className="text-[#14FFEC] font-bold">{video.user.name}</span> <br /> <span className={"text-xs"}>{computeReadableDate(video.created_at)}</span></p>
                     </li>
                 );
             })}
